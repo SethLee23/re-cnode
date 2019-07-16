@@ -2,52 +2,55 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-
+import url from '../modules/api'
+import fetch_g from '../modules/fetch_g'
 
 const store = new Vuex.Store({
   state: {
-    list: null,
+    lists: null,
   },
   mutations: {
-    init(state, list) {
-      state.list = list
+    init(state, lists) {
+      state.lists = lists
     },
     replyList(state, instance) {
-      state.list.forEach(element => {
-          element.lastReplyContent = instance
-      });
+      // state.lists.forEach(item => {
+      //     item.lastReplyContent = instance
+      // });
     },
-   
-    
   },
   actions: {
     getList({commit},data) {
-        this.$http
-        .get("https://cnodejs.org/api/v1/topics", {
-          params: { page: data.page, limit: data.limit, tab: data.tab }
-        })
+        fetch_g(url.topics,data,()=>{console.log(22222)})
         .then(res => {
-        //   this.isLoading = false;
-        let list = res.data.lists
-        list.lastReplyContent = ''
-        commit('init', list)
+        let lists = res.data.data
+        console.log(lists)
+        lists.forEach((item)=>{
+          item.lastReplyContent = ''
+        })
+        console.log(lists)
+        commit('init', lists)
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    // addReply({commit},data) {
-    //     this.$http
-    //     .get(`https://cnodejs.org/api/v1/topics/:${id}`)
-    //     .then(res => {
-    //     let list = res.data.data.replyes
-    //     list.lastReplyContent = ''
-    //     commit('init', list)
-    //     })
-    //     .catch(function(error) {
-    //       console.log(error);
-    //     });
-    // },
+    addReply(context,data) {
+      console.log("context.state.lists")
+      console.log(context.state.lists)
+      // context.state.lists.forEach(item => {
+      //   fetch_g(`${url.topics}/:${item.id}`)
+      //   .then(res => {
+      //   let replylist = res.data.data.replyes
+      //   console.log(replylist)
+      //   // commit('replyList', replylist)
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
+      // })
+        
+    },
 }
 
 })

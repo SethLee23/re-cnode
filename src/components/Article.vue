@@ -83,12 +83,6 @@ export default {
           this.isLoading = false;
           this.articleData = res.data.data;
           this.replies = this.articleData.replies;
-            // let len = this.replies.length;
-            // this.message.good = this.articleData.good;
-            // this.message.top = this.articleData.top;
-            // this.message.reply_count = this.articleData.reply_count;
-            // this.message.visit_count = this.articleData.visit_count;
-            // this.message.lastReply = this.replies[len - 1].author.avatar_url;
         })
         .catch(function(err) {
           console.log(err);
