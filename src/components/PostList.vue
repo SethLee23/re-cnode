@@ -473,6 +473,10 @@ title {
 .commentNum,
 .commentContent {
   font-size: 16px;
+  // font-family: "宋体", "Courier New", sans-serif, "Times New Roman",
+  //   "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+  //   "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  // font-weight: bold;
 }
 .replyWrapper {
   display: flex;

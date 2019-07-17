@@ -77,15 +77,14 @@ export default {
   padding: 0;
 }
 .Header {
-  /* border:1px solid red; */
-  /* background: rgb(68, 68, 68); */
-  background: rgb(46, 60, 81);
+  /* background: rgb(46, 60, 81); */
+  background: rgb(17, 17, 17);
   opacity: 0.8;
 }
 .logo {
   width: 120px;
-  padding-top: 9px;
-  padding-bottom: 9px;
+  padding-top: 18px;
+  padding-bottom: 18px;
   margin-left: 13%;
 }
 ul {
@@ -111,8 +110,8 @@ li > a:hover {
 }
 li {
   line-height: 14px;
-  padding-top: 17px;
-  padding-bottom: 17px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   margin-left: 25px;
 }
 .clearfix::after {

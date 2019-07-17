@@ -18,9 +18,9 @@
       clickMode="push"
     ></vue-particles>
 
-    <div class="wrapper">
+    <div class="wrapper" ref="main" style="">
       <Header></Header>
-      <div class="main">
+      <div class="main" >
         <router-view name="SliderBar"></router-view>
         <router-view name="main"></router-view>
       </div>
@@ -46,11 +46,20 @@ export default {
       eventBus: this.eventBus
     };
   },
+  created(){
+//      this.$children.forEach(childVm => {
+//      if(childVm.$el.classList.contains("article")) {
+// this.$refs.main.style.backgroundColor = 'rgb(62,66,69)'
+//      }
+//     });
+  },
   mounted(){
     this.hasPostList = this.$children.some(childVm => {
       return childVm.$el.classList.contains("PostList")
     });
      this.eventBus.$emit('init',this.hasPostList)
+
+   
   },
    watch: {
     '$route' (from, to) {
@@ -76,10 +85,11 @@ display:none;
 #app {
   height: 100vh;
   width: 100%;
-  background: linear-gradient(rgb(81, 165, 193) 0%, rgb(20, 98, 127) 100%);
+  /* background: linear-gradient(rgb(81, 165, 193) 0%, rgb(20, 98, 127) 100%); */
   /* background: linear-gradient(rgb(81, 127, 164) 0%, rgb(36, 57, 73) 100%); */
   opacity: 1.2064;
   overflow: hidden;
+  background:url(./assets/sky.jpg)
 }
 .wrapper {
   height: 100%;

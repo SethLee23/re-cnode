@@ -168,7 +168,7 @@ a {
 }
 .author {
   background: white;
-  border: 1px solid rgb(225, 225, 225);
+  /* border: 1px solid rgb(225, 225, 225); */
   margin-bottom: 12px;
 }
 .topicContent > a {
@@ -184,7 +184,7 @@ a {
 }
 .otherTopic,
 .noAnswer {
-  border: 1px solid rgb(225, 225, 225);
+  /* border: 1px solid rgb(225, 225, 225); */
 }
 .sliderBar {
   float: right;
