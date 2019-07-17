@@ -1,6 +1,5 @@
 <template>
   <div class="PostList">
-
     <div class="loading" v-if="isLoading">
       <img src="../assets/loading.gif" />
     </div>
@@ -8,44 +7,76 @@
     <div class="lists" v-else>
       <ul class="titleList">
         <li v-for="list in lists" v-if="list.last_reply">
-          <div  class="left_li">
+          <div class="left_li">
             <div class="img_title">
-              <img :src="list.author.avatar_url" alt />
-              <div style="border:1px solid gold" class="left_content">
-                <div class="authorName" style="margin:5% 0;">{{list.author.loginname}}</div>
-                <div class="title">{{list.title}}</div>
+              <router-link
+                :to="{
+        name:'user_Info',
+        params:{
+          name:list.author.loginname
+        }}"
+              >
+                <img :src="list.author.avatar_url" alt />
+              </router-link>
+              <div class="left_content">
+                <!-- <div> -->
+                  <router-link
+                   class="authorName" style="margin:5% 0 0 0%;"
+                    :to="{
+        name:'user_Info',
+        params:{
+          name:list.author.loginname
+        }}">{{list.author.loginname}}</router-link>
+                <!-- </div> -->
+                <!-- <div > -->
+                <router-link
+                  class="title"
+                  style="flex:1;display:flex;align-items:center"
+                  :to="{
+        name:'post_content',
+        params:{
+          id:list.id,
+          name:list.author.loginname
+        }}"
+                >{{list.title}}</router-link>
+                <!-- </div> -->
               </div>
             </div>
           </div>
 
           <div class="right_li">
-           <div class="articleInfo">
-             <div class="view">
-               <div class="view_1">浏览</div>
-               <div class="viewNum">{{list.visit_count}}</div>
-             </div>
-             <div class="comments">
-               <div class="comments_1">评论</div>
-              <div class="commentNum">{{list.reply_count}}</div>
-             </div>
-             <div class="type">
-               <div class="type_1">类型</div>
-               <div :class="[{good:(list.good==true||list.top==true)},{other:(list.good!=true&&list.top!=true)}]">
-                 {{list|tabFormatter}}
-               </div>
-             </div>
-             </div>
-           <div class="replies" >
-             <div class="lastComment">最近评论</div>
-            <!-- <div>
-              </div -->
-              <div style="display:flex;margin-left: 10px">
-                <div><img :src="list.last_reply.author.avatar_url" style="width:40px;height: 40px;"/></div>
-                <div class="commentContent" >{{list.last_reply.author.loginname}}</div>
+            <div class="articleInfo">
+              <div class="view">
+                <div class="view_1">浏览</div>
+                <div class="viewNum">{{list.visit_count}}</div>
               </div>
-             
-           </div>
+              <div class="comments">
+                <div class="comments_1">评论</div>
+                <div class="commentNum">{{list.reply_count}}</div>
+              </div>
+              <div class="type">
+                <div class="type_1">类型</div>
+                <div
+                  :class="[{good:(list.good==true||list.top==true)},{other:(list.good!=true&&list.top!=true)}]"
+                >{{list|tabFormatter}}</div>
+              </div>
             </div>
+            <div class="replies">
+              <div class="lastComment">最近评论</div>
+              <!-- <div>
+              </div-->
+              <div class="replyWrapper">
+                <div>
+                  <img
+                    :src="list.last_reply.author.avatar_url"
+                    style="width:40px;height: 40px;border-radius:50%;"
+                  />
+                </div>
+                <div class="commentContent">{{list.last_reply.author.loginname}}</div>
+                <div class="last_reply_at">{{list.last_reply_at|formatDate}}</div>
+              </div>
+            </div>
+          </div>
 
           <!-- 动态绑定属性：src,注意key -->
           <!-- <img :src="list.author.avatar_url" alt />
@@ -75,7 +106,6 @@
 </template>
 
 <script>
-import "github-markdown-css";
 import Pagination from "./Pagination";
 import fetch_g from "../modules/fetch_g";
 import url from "../modules/api";
@@ -107,25 +137,29 @@ export default {
   methods: {
     getPostList() {
       fetch_g(url.topics, {
-        params: { page: this.page, limit: 17, tab: this.tab }
+        params: { page: this.page, limit: 10, tab: this.tab }
       }).then(res => {
         let list = res.data.data;
-        let arr = []
-      //  Promise.all(
-          list.map((item, index) => {
-             fetch_g(`${url.article}${item.id}`).then(res => {
-              let len = res.data.data.replies.length;
-              // 添加属性
-              arr.push(Object.assign({},item,{last_reply:res.data.data.replies[len - 1]}))
-            });
-          })
+        let arr = [];
+        //  Promise.all(
+        list.map((item, index) => {
+          fetch_g(`${url.article}${item.id}`).then(res => {
+            let len = res.data.data.replies.length;
+            // 添加属性
+            arr.push(
+              Object.assign({}, item, {
+                last_reply: res.data.data.replies[len - 1]
+              })
+            );
+          });
+        });
         // );
-        console.log(arr)
-        this.lists = arr
+        console.log(arr);
+        this.lists = arr;
         this.isLoading = false;
       });
     },
-    
+
     changePage(value) {
       console.log("传入page");
       this.page = value;
@@ -157,15 +191,67 @@ export default {
 
 
 <style lang="less" scoped>
+@font-face {
+  font-family: "dolly";
+  src: url(../../static/dolly-roman.woff.ttf);
+}
+@font-face {
+  font-family: "droid";
+  src: url(../../static/DroidSansFallbackBold.ttf);
+}
+@font-face {
+  font-family: "yuan";
+  src: url(../../static/ErZiYuanPangTouYuJian-2.ttf);
+}
+@font-face {
+  font-family: "pika";
+  src: url(../../static/FangZhengPiKaPiKa-2.ttf);
+}
+@font-face {
+  font-family: "hezi";
+  src: url(../../static/HeZi-TingBuDao-2.ttf);
+}
+@font-face {
+  font-family: "shiguang";
+  src: url(../../static/ShiGuangManManZou-2.ttf);
+}
+@font-face {
+  font-family: "wenyue";
+  src: url(../../static/WenYueGuTiFangSong-2.ttf);
+}
+@font-face {
+  font-family: "cambo";
+  src: url(../../static/Cambo-Regular.otf);
+}
+//font-family
+.lastComment,
+.view_1,
+.comments_1,
+.type_1 {
+  font-family: droid;
+}
+.title,
+.last_reply_at {
+  font-family: shiguang;
+}
+.viewNum,
+.commentNum {
+  font-family: pika;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "宋体", "Courier New", sans-serif, "Times New Roman",
+    "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
+
 li {
   list-style-type: none;
-  display:flex;
-  flex:1;
+  display: flex;
+  flex: 1;
 }
 .loading {
   height: 100vh;
@@ -181,21 +267,10 @@ li {
   max-width: 1094px;
   margin: 0 auto;
 }
-// .titleList > li > img {
-//   width: 30px;
-// }
+
 .PostList {
   margin-top: 14px;
 }
-// .allCount {
-//   font-size: 12px;
-//   width: 70px;
-//   text-align: center;
-// }
-// .reply_count {
-//   color: rgb(158, 120, 192);
-//   font-size: 14px;
-// }
 .good,
 .other {
   font-size: 12px;
@@ -213,105 +288,19 @@ li {
 ul {
   background: white;
   padding-top: 20px;
-}
-li {
-  border-top: 1px solid rgb(225, 225, 225);
-  // display: flex;
-  // align-items: center;
-  margin: 2% 10%;
-  // padding: 2% 0;
-  // position: relative;
-  background: white;
-  border: 1px solid black;
+  padding-bottom: 20px;
   border-radius: 4px;
 }
-.right_li {
-  flex:1;
-  border:1px solid red;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 5px;
-} 
-.left_li {
-  flex:1;
-  display: flex;
-  align-items: center;
-width: 100%;
+li {
+  border: 1px solid rgb(225, 225, 225);
+  margin: 2% 10%;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 3px 15px 4px rgba(51, 51, 51, 0.2);
 }
-li:hover {
-  background: rgb(245, 245, 245);
-}
-.last_reply_at {
-  position: absolute;
-  right: 10px;
-  color: #778087;
-  font-size: 12px;
-}
-
-a:focus,
-a:hover {
-  color: #005580;
-  text-decoration: underline;
-}
-a:active,
-a:hover {
-  outline: 0;
-}
-a {
-  text-decoration: none;
-  color: black;
-  max-width: 70%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  font-size: 16px;
-  line-height: 30px;
-  margin-left: 5px;
-  color: #333333;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #333333;
-}
-a:visited {
-  color: #888888;
-}
-.topbar {
-  height: 40px;
-  background-color: #f5f5f5;
-}
-
-.topbar > span {
-  font-size: 14px;
-  color: #80bd01;
-  line-height: 40px;
-  margin: 0 10px;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.toobar span:hover {
-  color: #9e78c0;
-}
-/*重写 css*/
-li > .left_li > div > img {
-  width: 30%;
-  height: 100%;
-  margin-left: 3%;
-  border: 1px solid pink;
-}
-
-ul > li  {
+ul > li {
   position: relative;
   padding: 10px 0;
-}
-li > .left_li > div > .left_content {
-  margin-left: 10%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 ul > li::before {
   content: "";
@@ -324,71 +313,173 @@ ul > li::before {
 }
 ul > li:nth-child(n)::before {
   background: #bfdbd2;
+  opacity: 0.8;
 }
 ul > li:nth-child(2n)::before {
   background: #dcb239;
+  opacity: 0.6;
 }
 ul > li:nth-child(3n)::before {
   background: #fedcd2;
 }
 ul > li:nth-child(4n)::before {
   background: #df744a;
+  opacity: 0.6;
 }
-.commentContent, title {
-overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+ul > li:hover::before {
+  opacity: 1;
 }
-.articleInfo {
-  display: flex; 
-  border: 1px solid green;
+li:hover {
+  box-shadow: 0 3px 15px 3px rgba(51, 51, 51, 0.5);
+  transform: scale(1.05);
+  transition: all 0.5s;
+   background: rgb(245, 245, 245);
 }
-.img_title {
-  border: 1px solid green;
+.right_li {
+  flex: 11;
   display: flex;
-  width: 100%;
-    // justify-content: center;
-    // align-items: center;
+  flex-direction: column;
+  padding: 5px 5px;
+  border-left: 1px solid #dddddd;
 }
-.title,.view_1,.comments_1,.type_1, .lastComment {
-  -webkit-font-smoothing: antialiased;
-  color: rgb(83,83,83);
-  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+.left_li {
+  flex: 13;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.last_reply_at {
+  margin-left: auto;
+  margin-right: 10px;
+  color: #778087;
+  font-size: 12px;
+}
+.title:focus,
+.title:hover {
+  color: #005580;
+  // text-decoration: underline;
+}
+.title:active,
+.title:hover {
+  outline: 0;
 }
 .title {
-  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  color: #666666;
+}
+
+.title:hover {
+  text-decoration: underline;
+  color: #333333;
+}
+.title:visited {
+  color: #888888;
+}
+
+.authorName,
+.commentContent {
+  font-weight: bold;
+  font-family: shiguang;
+  color: black;
+  
+}
+.authorName{
+  text-decoration: none;
+}
+.authorName:hover{
+  text-decoration: none;
+}
+.authorName:visited {
+  color: black;
+}
+
+li > .left_li > div > a {
+  width: 30%;
+  height: 100%;
+  margin-left: 4%;
+}
+li > .left_li > div > a > img {
+  width: 100%;
+  height: 100%;
+}
+
+
+li > .left_li > div > .left_content {
+  margin-left: 10%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.articleInfo {
+  display: flex;
+}
+.img_title {
+  display: flex;
+  width: 100%;
+}
+
+.title,
+.view_1,
+.comments_1,
+.type_1,
+.lastComment {
+  -webkit-font-smoothing: antialiased;
+  color: rgb(83, 83, 83);
+}
+.title {
+  font-size: 1.2rem;
 }
 .authorName {
   -webkit-font-smoothing: antialiased;
-  font-weight:bolder;
-  font-size:20px;
-  font-family:"宋体","Courier New",sans-serif,"Times New Roman","Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;;
-  // color: rgb(77,77,77);
-// margin: 10px 0px;
+  font-size: 20px;
 }
-.view_1,.comments_1,.type_1,.lastComment {
-font-size: 14px;
-white-space: nowrap;
+.view_1,
+.comments_1,
+.type_1,
+.lastComment {
+  font-size: 14px;
+  white-space: nowrap;
+  margin-bottom: 5px;
 }
 .lastComment {
-  margin: 10px 10px;
+  margin: 10px 10px 5px 10px;
 }
-.view,.comments,.type {
-border: 1px solid pink;
-display: flex;
-justify-content:center;
-align-items: center;
-flex-direction: column;
+.view,
+.comments,
+.type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.view{
+.view {
   margin: 0px 10px;
 }
-.comments,.type {
-   margin: 0 10px;
+.comments,
+.type {
+  margin: 0 5%;
 }
-.viewNum,.commentNum{
-font-size: 16px;
+.viewNum,
+.commentNum,
+.commentContent {
+  font-size: 16px;
+}
+.replyWrapper {
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+}
+.commentContent {
+  margin-left: 10px;
 }
 </style>

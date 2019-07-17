@@ -59,6 +59,18 @@ export default {
 };
 </script>
 <style scoped>
+@font-face {
+  font-family: "shiguang";
+  src: url(../../static/ShiGuangManManZou-2.ttf);
+}
+@font-face {
+  font-family: "droid";
+  src: url(../../static/DroidSansFallbackBold.ttf);
+}
+@font-face {
+  font-family: "pika";
+  src: url(../../static/FangZhengPiKaPiKa-2.ttf);
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -87,9 +99,9 @@ li {
 }
 
 li > a {
-  font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体",
+  font-family: pika,Helvetica, Tahoma, Arial, STXihei, "华文细黑", Heiti, "黑体",
     "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
-  font-size: 16px;
+  font-size: 1.15rem;
   color: rgb(200, 200, 200);
   text-decoration: none;
   cursor: pointer;
