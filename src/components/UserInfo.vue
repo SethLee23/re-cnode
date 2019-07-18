@@ -67,52 +67,42 @@
 
         <div class="loginTime">注册时间 {{userData.create_at | formatDate}}</div>
       </section>
-<!-- <div style="border: 1px solid red;width: 300px;height:300px;"> -->
- 
-        <!-- </div> -->
-         <div class="topics">
-        <p>最近创建的话题</p>
-        
-      </div>
-      <div class="replies">
-        <p>最近参与的话题</p>
-        <ul>
-          <li v-for="reply in returnFiveReplies">
-            <img :src="reply.author.avatar_url" alt />
-            <router-link :to="{name:'post_content',params:{id:reply.id}}">
-              <span class="title">{{reply.title}}</span>
-            </router-link>
-            <span class="last_reply_at">{{reply.last_reply_at | formatDate}}</span>
-          </li>
-          <!-- <li>查看更多»</li> -->
-        </ul>
-      </div>
-       <div style="width:300px;height:100px;">
+      <!-- <div style="border: 1px solid red;width: 300px;height:300px;"> -->
+      <!-- <div style="width:300px;height:200px;">
         <swiper :options="swiperOption" style="border: 1px solid red;">
-          <swiper-slide v-for="topic in returnFiveTopic" style="border: 1px solid red;">
+          <swiper-slide v-for="topic in returnFiveTopic" style="
+          border: 1px solid red;">
             <div >
-              <img :src="topic.author.avatar_url" alt />
-            <!-- <span>{{topic|InformationFormatter}}</span> -->
-            <router-link :to="{name:'post_content',params:{id:topic.id}}">
+      <img :src="topic.author.avatar_url" alt />-->
+      <!-- <span>{{topic|InformationFormatter}}</span> -->
+      <!-- <router-link :to="{name:'post_content',params:{id:topic.id}}">
               <span class="title">{{topic.title}}</span>
             </router-link>
             <span class="last_reply_at">{{topic.last_reply_at | formatDate}}</span>
             </div>
             
-          <!-- <li>查看更多»</li> -->
           </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
-        </div>
+      </div>-->
+
+      <!-- </div> -->
+      
+      <div style="width:80%;margin: 0 auto;">
+      <p class="topics">最近创建的话题</p>
+        <swiper :lists="returnFiveTopic"></swiper>
+      </div>
+
+      <div style="width:90%; margin: 5% auto;">
+         <p  class="replies">最近参与的话题</p>
+        <swiper :lists="returnFiveReplies"></swiper>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
-//  import VueAwesomeSwiper from 'vue-awesome-swiper'
-import "swiper/dist/css/swiper.css"; ////这里注意具体看使用的版本是否需要引入样式，以及具体位置。
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import swiper from "./swiper";
 export default {
   name: "UserInfo",
   data() {
@@ -122,42 +112,11 @@ export default {
       userCollectData: [],
       replies: [],
       topics: [],
-      recieveMessage: {},
-      swiperOption: {
-         width:200,
-     height:200,
-        notNextTick: true,
-          //循环
-          loop:true,
-          //设定初始化时slide的索引
-          initialSlide:0,
-          //自动播放
-          autoplay:true,
-          speed:800,
-          //滑动方向
-           direction : 'vertical',
-          on: {
-              slideChangeTransitionEnd: function(){
-                // console.log(this.activeIndex);//切换结束时，告诉我现在是第几个slide
-              },
-          },
-          //左右点击
-          navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-          },
-          //分页器设置         
-          pagination: {
-              el: '.swiper-pagination',
-              clickable :true
-          }
-        },
-       
+      recieveMessage: {}
     };
   },
   components: {
-    swiper,
-    swiperSlide
+    swiper
   },
   beforeMount: function() {},
   created: function() {
@@ -172,6 +131,12 @@ export default {
       console.log(3);
     }),
       (this.isLoading = true);
+  },
+  mounted() {},
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
   },
   methods: {
     getUserData() {
@@ -247,10 +212,8 @@ ul {
   margin: 0px auto;
 }
 .information section {
-  /* background: #3a3f41 url(../assets/note-bg.jpg); */
   background: rgba(0, 0, 0, 0.5);
   padding: 5%;
-  margin-bottom: 100px;
 }
 .information section > .top {
   display: flex;
@@ -258,7 +221,13 @@ ul {
   justify-content: center;
   flex-direction: column;
 }
-.information section .userName {
+.topics, .replies {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: shiguang;
+  color: rgb(180, 180, 180);
+}
+.information section .userName{
   font-size: 4rem;
   font-weight: bold;
   font-family: cambo;
@@ -280,78 +249,12 @@ ul {
   justify-content: center;
   margin-top: 5%;
 }
-.middle img,
-.middle .score,
-.middle .github {
-}
-.middle .information .replies,
-.information .topics {
-  font-size: 0.72rem;
-  border-top: 10px #dddddd solid;
-  background: pink;
-}
 .loginTime {
   text-align: right;
   font-family: shiguang;
   color: rgb(156, 156, 156);
 }
-/* 
-.information > div > p {
-  padding: 12px 0 12px 12px;
-  background-color: rgba(212, 205, 205, 0.17);
-  font-size: 0.75rem;
-  margin: 0;
-}
-.information > div > ul > li {
-  padding: 9px 0 9px 0px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  border-top: 1px solid rgb(225, 225, 225);
-  display: flex;
-  align-items: center;
-  position: relative;
-  background: white;
-  font-size: 16px;
-  line-height: 30px;
-}
-.information > div > ul > li > a {
-  color: #08c;
-  text-decoration: none;
-}
-a .title {
-  -o-text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-}
 
-a .title {
-  overflow: hidden;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-a {
-  color: #08c;
-  text-decoration: none;
-}
-section > div,
-section > span {
-  line-height: 17px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 14px;
-}
-section > :not(.score),
-section > .github > a {
-  color: #778087;
-} */
-/* .last_reply_at {
-  position: absolute;
-  right: 10px;
-  color: #778087;
-  font-size: 12px;
-} */
 .github,
 .score {
   display: flex;
@@ -373,5 +276,8 @@ section > .github > a {
 }
 .score > .icon_coin {
   fill: rgb(255, 159, 6);
+}
+.topics>p, .replies>p {
+
 }
 </style>

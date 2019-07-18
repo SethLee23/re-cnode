@@ -63,8 +63,6 @@
             </div>
             <div class="replies">
               <div class="lastComment">最近评论</div>
-              <!-- <div>
-              </div-->
               <div class="replyWrapper">
                 <div>
                   <img
@@ -77,27 +75,6 @@
               </div>
             </div>
           </div>
-
-          <!-- 动态绑定属性：src,注意key -->
-          <!-- <img :src="list.author.avatar_url" alt />
-          <span class="allCount">
-            <span class="reply_count">{{list.reply_count}}</span>
-            /{{list.visit_count}}
-          </span>
-          <span
-            :class="[{good:(list.good==true||list.top==true)},{other:(list.good!=true&&list.top!=true)}]"
-          >{{list|tabFormatter}}</span>
-          <router-link
-            :to="{
-        name:'post_content',
-        params:{
-          id:list.id,
-          name:list.author.loginname
-        }}"
-          >
-            <span class="topic_title">{{list.title}}</span>
-          </router-link>
-          <span class="last_reply_at">{{list.last_reply_at|formatDate}}</span>-->
         </li>
       </ul>
     </div>
@@ -286,7 +263,7 @@ li {
   background: #999999;
 }
 .titleList {
-  background: white;
+  background: #3a3f41 url(../assets/note-bg.jpg);
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 4px;

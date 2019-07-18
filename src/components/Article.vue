@@ -48,7 +48,7 @@
             </div>
 
             <div class="replyContent" style="display: flex; flex-direction:column;margin-left:5%;overflow:auto;flex:1">
-              <div style="display: flex;flex:1;align-items:center;" class="reply_info">
+              <div style="display: flex;flex:1" class="reply_info">
               <router-link :to="{name:'user_Info',params:{name:reply.author.loginname}}">
                 <span @click="handel">{{reply.author.loginname}}</span>
               </router-link>
