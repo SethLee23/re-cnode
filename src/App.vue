@@ -21,7 +21,7 @@
     <div class="wrapper" ref="main" style="">
       <Header></Header>
       <div class="main" >
-        <router-view name="SliderBar"></router-view>
+        <router-view name="SliderBar" v-if="wideScreen"></router-view>
         <router-view name="main"></router-view>
       </div>
     </div>
@@ -39,7 +39,8 @@ export default {
   data(){
     return {
     hasPostList: false,
-    eventBus: new Vue()
+    eventBus: new Vue(),
+    wideScreen: true,
   }},
   provide() {
     return {
@@ -47,19 +48,24 @@ export default {
     };
   },
   created(){
-//      this.$children.forEach(childVm => {
-//      if(childVm.$el.classList.contains("article")) {
-// this.$refs.main.style.backgroundColor = 'rgb(62,66,69)'
-//      }
-//     });
+    
   },
   mounted(){
     this.hasPostList = this.$children.some(childVm => {
       return childVm.$el.classList.contains("PostList")
     });
      this.eventBus.$emit('init',this.hasPostList)
+     window.addEventListener('resize',()=>{
+     if(document.documentElement.clientWidth>900){
+       console.log('>900')
+          this.wideScreen = true
+        }
+     if(document.documentElement.clientWidth<900){
+       console.log('<900')
+          this.wideScreen = false
+        }
 
-   
+     })
   },
    watch: {
     '$route' (from, to) {
@@ -108,5 +114,10 @@ display:none;
 html {
   width: 100vw;
   height: 100vh;
+}
+@media (max-width:900px) {
+  .sliderBar_wrapper {
+    display: none;
+  }
 }
 </style>

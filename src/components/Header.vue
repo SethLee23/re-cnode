@@ -81,11 +81,14 @@ export default {
   background: rgb(17, 17, 17);
   opacity: 0.8;
 }
+.Header > a{
+margin-left: 10%;
+}
 .logo {
   width: 120px;
   padding-top: 18px;
   padding-bottom: 18px;
-  margin-left: 13%;
+  
 }
 ul {
   float: right;

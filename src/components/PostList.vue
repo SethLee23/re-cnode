@@ -285,24 +285,24 @@ li {
 .other {
   background: #999999;
 }
-ul {
+.titleList {
   background: white;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 4px;
 }
-li {
+.titleList li {
   border: 1px solid rgb(225, 225, 225);
   margin: 2% 10%;
   background: white;
   border-radius: 4px;
   box-shadow: 0 3px 15px 4px rgba(51, 51, 51, 0.2);
 }
-ul > li {
+ul.titleList > li {
   position: relative;
   padding: 10px 0;
 }
-ul > li::before {
+ul.titleList > li::before {
   content: "";
   width: 3px;
   position: absolute;
@@ -311,25 +311,25 @@ ul > li::before {
   height: 95%;
   border-radius: 2px;
 }
-ul > li:nth-child(n)::before {
+ul.titleList > li:nth-child(n)::before {
   background: #bfdbd2;
   opacity: 0.8;
 }
-ul > li:nth-child(2n)::before {
+ul.titleList > li:nth-child(2n)::before {
   background: #dcb239;
   opacity: 0.6;
 }
-ul > li:nth-child(3n)::before {
+ul.titleList > li:nth-child(3n)::before {
   background: #fedcd2;
 }
-ul > li:nth-child(4n)::before {
+ul.titleList > li:nth-child(4n)::before {
   background: #df744a;
   opacity: 0.6;
 }
-ul > li:hover::before {
+ul.titleList > li:hover::before {
   opacity: 1;
 }
-li:hover {
+.titleList li:hover {
   box-shadow: 0 3px 15px 3px rgba(51, 51, 51, 0.5);
   transform: scale(1.05);
   transition: all 0.5s;
@@ -375,7 +375,7 @@ li:hover {
   color: #333333;
 }
 .title:visited {
-  color: #888888;
+  color: #ccc;
 }
 
 .authorName,
