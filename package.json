@@ -15,6 +15,7 @@
     "jquery": "^3.4.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "mint-ui": "^2.2.13",
     "normalize.css": "^8.0.1",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",

@@ -98,7 +98,7 @@ export default {
       isLoading: false,
       lists: {},
       page: 1,
-      // tab: this.$routes.params.tab||'all'
+      loadingMore: false
     };
   },
   components: {
