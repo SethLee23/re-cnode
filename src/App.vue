@@ -21,7 +21,7 @@
     <div class="wrapper" ref="main" style="">
       <Header></Header>
       <div class="main" >
-        <router-view name="SliderBar" v-if="wideScreen"></router-view>
+        <router-view name="SliderBar" class="SliderBar" v-if="wideScreen"></router-view>
         <router-view name="main"></router-view>
       </div>
     </div>
@@ -84,15 +84,10 @@ export default {
 };
 </script>
 
-<style>
-/* .main::-webkit-scrollbar{
-display:none;
-} */
+<style scoped>
 #app {
   height: 100vh;
   width: 100%;
-  /* background: linear-gradient(rgb(81, 165, 193) 0%, rgb(20, 98, 127) 100%); */
-  /* background: linear-gradient(rgb(81, 127, 164) 0%, rgb(36, 57, 73) 100%); */
   opacity: 1.2064;
   overflow: hidden;
   background:url(./assets/sky.jpg)
@@ -120,4 +115,13 @@ html {
     display: none;
   }
 }
+ @media screen and (min-width: 300px) and (max-width: 577px) {
+.main {
+  width: 100%;
+}
+.SliderBar {
+  display: none;
+}
+ }
+
 </style>

@@ -21,7 +21,7 @@
               </li>
 
               <li>•{{this.articleData.visit_count}}次浏览</li>
-              <li>•来自{{this.articleData|articleTabFormatter}}</li>
+              <li class="from_type">•来自{{this.articleData|articleTabFormatter}}</li>
             </ul>
           </div>
           <div class="markdown-body topic_content" v-html="this.articleData.content"></div>
@@ -46,7 +46,6 @@
                 class="reply_by_author"
               >作者</div>
             </div>
-
             <div class="replyContent" style="display: flex; flex-direction:column;margin-left:5%;overflow:auto;flex:1">
               <div style="display: flex;flex:1" class="reply_info">
               <router-link :to="{name:'user_Info',params:{name:reply.author.loginname}}">

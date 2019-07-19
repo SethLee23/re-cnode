@@ -20,13 +20,15 @@
               </router-link>
               <div class="left_content">
                 <!-- <div> -->
-                  <router-link
-                   class="authorName" style="margin:5% 0 0 0%;"
-                    :to="{
+                <router-link
+                  class="authorName"
+                  style
+                  :to="{
         name:'user_Info',
         params:{
           name:list.author.loginname
-        }}">{{list.author.loginname}}</router-link>
+        }}"
+                >{{list.author.loginname}}</router-link>
                 <!-- </div> -->
                 <!-- <div > -->
                 <router-link
@@ -38,9 +40,11 @@
           id:list.id,
           name:list.author.loginname
         }}"
-                >{{list.title}}</router-link>
-                <!-- </div> -->
+                >
+                  <span>{{list.title}}</span>
+                </router-link>
               </div>
+              <!-- </div> -->
             </div>
           </div>
 
@@ -94,28 +98,41 @@ export default {
       isLoading: false,
       lists: {},
       page: 1,
-      tab: ""
+      // tab: this.$routes.params.tab||'all'
     };
   },
   components: {
     Pagination
   },
-  created: function() {
+   beforeMount() {
+     this.getPostList();
+  },
+  created() {
+    console.log(2222)
     this.isLoading = true;
-    this.getPostList();
+    // this.getPostList();
   },
   mounted() {
-    this.$root.bus.$on("handelType", index => {
-      console.log(index);
-      this.changeTab(index);
-      this.getPostList();
-    });
+    // this.getPostList();
+    // this.$root.bus.$on("handelType", index => {
+    //   console.log(index);
+    //   this.changeTab(index);
+    //   this.getPostList();
+    // });
   },
+   watch: {
+    $route(from,to) {
+      console.log('this.route')
+      this.getPostList()
+      }
+    },
   methods: {
     getPostList() {
       fetch_g(url.topics, {
-        params: { page: this.page, limit: 10, tab: this.tab }
+        params: { page: this.page, limit: 10, tab: this.$route.params.tab }
       }).then(res => {
+        console.log('taeasadsadsad')
+        console.log(this.$route.params.tab)
         let list = res.data.data;
         let arr = [];
         //  Promise.all(
@@ -142,26 +159,6 @@ export default {
       this.page = value;
       this.getPostList();
     },
-    changeTab(index) {
-      switch (index) {
-        case 0:
-          this.tab = "all";
-          break;
-        case 1:
-          this.tab = "good";
-          break;
-        case 2:
-          this.tab = "share";
-          break;
-        case 3:
-          this.tab = "ask";
-          break;
-        case 4:
-          this.tab = "job";
-          break;
-      }
-      return;
-    }
   }
 };
 </script>
@@ -207,7 +204,7 @@ export default {
 .type_1 {
   font-family: droid;
 }
-.title,
+.title span,
 .last_reply_at {
   font-family: shiguang;
 }
@@ -253,6 +250,7 @@ li {
   border-radius: 3px;
   border-radius: 3px;
   color: #fff;
+  font-family: shiguang;
 }
 .good {
   background: #80bd01;
@@ -268,22 +266,22 @@ li {
 }
 .titleList li {
   border: 1px solid rgb(225, 225, 225);
-  margin: 2% 10%;
+  margin: 1% 10%;
   background: white;
   border-radius: 4px;
   box-shadow: 0 3px 15px 4px rgba(51, 51, 51, 0.2);
 }
 ul.titleList > li {
   position: relative;
-  padding: 5px 0;
+  padding: 6px 0;
 }
 ul.titleList > li::before {
   content: "";
   width: 3px;
   position: absolute;
   left: 5px;
-  top: 2.5%;
-  height: 95%;
+  top: 6%;
+  height: 88%;
   border-radius: 2px;
 }
 ul.titleList > li:nth-child(n)::before {
@@ -308,7 +306,7 @@ ul.titleList > li:hover::before {
   box-shadow: 0 3px 15px 3px rgba(51, 51, 51, 0.5);
   transform: scale(1.05);
   transition: all 0.5s;
-   background: rgb(245, 245, 245);
+  background: rgb(245, 245, 245);
 }
 .right_li {
   flex: 11;
@@ -345,7 +343,7 @@ ul.titleList > li:hover::before {
   color: #666666;
 }
 
-.title:hover {
+.title :hover {
   text-decoration: underline;
   color: #333333;
 }
@@ -358,12 +356,12 @@ ul.titleList > li:hover::before {
   font-weight: bold;
   font-family: shiguang;
   color: black;
-  
 }
-.authorName{
+.authorName {
   text-decoration: none;
+  margin: 2% 0 0 0%;
 }
-.authorName:hover{
+.authorName:hover {
   text-decoration: none;
 }
 .authorName:visited {
@@ -371,7 +369,7 @@ ul.titleList > li:hover::before {
 }
 
 li > .left_li > div > a {
-  width: 25%;
+  width: 20%;
   height: 100%;
   margin-left: 4%;
 }
@@ -380,7 +378,6 @@ li > .left_li > div > a > img {
   height: 100%;
 }
 
-
 li > .left_li > div > .left_content {
   margin-left: 10%;
   flex: 1;
@@ -388,13 +385,6 @@ li > .left_li > div > .left_content {
   flex-direction: column;
 }
 
-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
 .articleInfo {
   display: flex;
 }
@@ -411,20 +401,20 @@ title {
   -webkit-font-smoothing: antialiased;
   color: rgb(83, 83, 83);
 }
-.title {
+.title span {
   font-size: 1.2rem;
 }
 .authorName {
   -webkit-font-smoothing: antialiased;
-  font-size: 20px;
+  font-size: 18px;
 }
 .view_1,
 .comments_1,
 .type_1,
 .lastComment {
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 .lastComment {
   margin: 10px 10px 8px 10px;
@@ -456,5 +446,99 @@ title {
 }
 .commentContent {
   margin-left: 10px;
+}
+a {
+  text-decoration: none;
+}
+.img_title .left_content .title span {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2; /** 显示的行数 **/
+  overflow: hidden; /** 隐藏超出的内容 **/
+}
+@media screen and (min-width: 577px) and (max-width: 1000px) {
+  ul.titleList > li::before {
+    display: none;
+  }
+}
+@media screen and (max-width: 577px) {
+  .main {
+    width: 100%;
+  }
+  .titleList {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+  }
+  .titleList li {
+    border: 1px solid rgb(225, 225, 225);
+    margin: 2% 1%;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 4px rgba(51, 51, 51, 0.2);
+  }
+  ul.titleList > li {
+    position: relative;
+    padding: 5px 0;
+  }
+  .img_title {
+    align-items: center;
+    justify-content: center;
+  }
+  .authorName {
+    margin-bottom: 5px;
+    margin-top: 2%;
+    text-align: center;
+    font-size: 1rem;
+  }
+  ul.titleList > li {
+    position: relative;
+    padding: 4px 0;
+  }
+  .title span {
+    font-size: 1rem;
+  }
+  ul.titleList > li::before {
+    display: none;
+  }
+  .img_title {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .img_title>.left_content > a {
+    display: none;
+  }
+  li > .left_li > div > a > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+  .right_li {
+    flex: 13;
+  }
+  .left_li {
+    flex: 12;
+  }
+  .view_1,
+  .comments_1,
+  .type_1,
+  .lastComment {
+    font-size: 0.8rem;
+  }
+  .viewNum,
+  .commentNum,
+  .commentContent {
+    font-size: 0.8rem;
+  }
+  .good,
+  .other {
+    font-size: 0.6rem;
+  }
 }
 </style>

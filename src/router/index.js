@@ -10,11 +10,19 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
+      components: {
+        main:PostList
+      }
+      },
+    {
+      path: '/tab=:tab',
       name: 'root',
       components: {
         main:PostList
       }
     },
+   
     {
       path:'/topic/:id &author=:name',
       name:'post_content',

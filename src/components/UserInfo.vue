@@ -69,13 +69,13 @@
       </section>
       
       <div style="width:80%;margin: 0 auto;">
-      <p class="topics">最近创建的话题</p>
-        <swiper :lists="returnFiveTopic"></swiper>
+      <p class="topicsRecent">最近创建的话题</p>
+        <swiper :lists="returnFiveTopic" ref="1" thisClass="topics1"></swiper>
       </div>
 
-      <div style="width:90%; margin: 5% auto;">
+      <div class="replyWrapper">
          <p  class="replies">最近参与的话题</p>
-        <swiper :lists="returnFiveReplies"></swiper>
+        <swiper :lists="returnFiveReplies" ref="2" thisClass="replies1"></swiper>
       </div>
     </div>
   </div>
@@ -99,7 +99,10 @@ export default {
     swiper
   },
   beforeMount: function() {},
-  created: function() {
+  created() {
+     window.onresize=function(){
+    swiper.update();
+}
     this.getUserData();
     this.getCollect();
     console.log(1);
@@ -181,13 +184,11 @@ ul {
   width: 100%;
   margin: 10px auto;
 }
-.information > section {
-  width: 40%;
-  margin: 0px auto;
-}
 .information section {
   background: rgba(0, 0, 0, 0.5);
   padding: 5%;
+  width: 40%;
+  margin: 0px auto;
 }
 .information section > .top {
   display: flex;
@@ -195,7 +196,7 @@ ul {
   justify-content: center;
   flex-direction: column;
 }
-.topics, .replies {
+.topicsRecent, .replies {
   font-size: 2rem;
   font-weight: bold;
   font-family: shiguang;
@@ -251,7 +252,56 @@ ul {
 .score > .icon_coin {
   fill: rgb(255, 159, 6);
 }
-.topics>p, .replies>p {
 
+@media screen and (max-width: 577px) {
+.information section .userName{
+  font-size: 1.5rem;
+}
+.information section {
+  width: 80%;
+}
+.information section .collect {
+  font-size: 1.2rem;
+}
+.github > .icon_github,
+.score > .icon_coin {
+  width: 1.2em;
+  height: 1.2em;
+}
+.github > .icon_github{
+  fill: white;
+}
+.github > .githubAddress,
+.score > .scoreNum {
+  white-space: nowrap;
+  font-size: 1rem;
+}
+.information section img {
+  width: 26%;
+  border-radius: 50%;
+  margin: 0 15%;
+}
+.loginTime {
+  font-size: 1rem
+}
+.replyWrapper {
+  width:80%; 
+  margin: 5% auto;
+}
+.topicsRecent, .replies {
+  font-size: 1.5rem!important;
+}
+}
+@media screen and (min-width: 577px) and (max-width: 1000px) {
+  .top > .userName {
+    font-size: 2rem!important;
+  }
+  .top > .collect {
+    font-size: 1.5rem!important;
+  }
+  .score .scoreNum {
+    white-space: nowrap;
+  }
+  
 }
 </style>
