@@ -21,7 +21,7 @@ export default {
   name: "Pagination",
   data() {
     return {
-      pages: [1, 2, 3, 4, 5, "......"],
+      pages: [1, 2, 3, 4, 5, "..."],
       currentPage: 1 ,//当前选中的页码
     };
   },//123456...
@@ -65,37 +65,42 @@ export default {
 
 <style scoped>
 .pagination {
-  margin-top: 5px;
+  margin-top: 15px;
   margin-bottom: 20px;
-  background-color: white;
-  padding: 6px 20px;
-  border-radius: 5px;
-  /*box-shadow: 0px 2px 9px #888888;*/
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 10px;
   border: 1px solid #888888;
 }
 
 button {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  color: #778087;
-  border-radius: 3px;
+  border: 1px solid #ccc;
+  color: #bbb;
+  border-radius: 6px;
   outline: none;
   height: 21px;
   cursor: pointer;
-  padding: 0 2px;
-  width: 55px;
+  padding: 3px 6px;
   height: 29px;
+  background: none;
+  background-color: rgba(0,0,0,0.1);
+  margin: 0 1%;
+  font-family: pika;
 }
 
 .pagebtn {
-  position: relative;
+  /* position: relative; */
   bottom: 1px;
   width: 40px;
-  margin: 0 4px;
+  /* margin: 0 4px; */
 }
 
 .currentPage {
-  color: white;
-  background-color: #1f1b1b;
+  color: black;
+  background: #3a3f41 url(../assets/note-bg.jpg);
+  font-weight: bold;
 }
 </style>

@@ -67,26 +67,6 @@
 
         <div class="loginTime">注册时间 {{userData.create_at | formatDate}}</div>
       </section>
-      <!-- <div style="border: 1px solid red;width: 300px;height:300px;"> -->
-      <!-- <div style="width:300px;height:200px;">
-        <swiper :options="swiperOption" style="border: 1px solid red;">
-          <swiper-slide v-for="topic in returnFiveTopic" style="
-          border: 1px solid red;">
-            <div >
-      <img :src="topic.author.avatar_url" alt />-->
-      <!-- <span>{{topic|InformationFormatter}}</span> -->
-      <!-- <router-link :to="{name:'post_content',params:{id:topic.id}}">
-              <span class="title">{{topic.title}}</span>
-            </router-link>
-            <span class="last_reply_at">{{topic.last_reply_at | formatDate}}</span>
-            </div>
-            
-          </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>-->
-
-      <!-- </div> -->
       
       <div style="width:80%;margin: 0 auto;">
       <p class="topics">最近创建的话题</p>
@@ -124,19 +104,13 @@ export default {
     this.getCollect();
     console.log(1);
     this.$root.bus.$on("transMessage", value => {
-      console.log(2);
       this.recieveMessage = value;
-      console.log(2);
       console.log(this.recieveMessage);
-      console.log(3);
     }),
       (this.isLoading = true);
   },
   mounted() {},
   computed: {
-    swiper() {
-      return this.$refs.mySwiper.swiper;
-    }
   },
   methods: {
     getUserData() {
@@ -169,12 +143,12 @@ export default {
   computed: {
     returnFiveTopic() {
       if (this.topics.length) {
-        return this.topics.slice(0, 5);
+        return this.topics.slice(0, 10);
       }
     },
     returnFiveReplies() {
       if (this.replies.length) {
-        return this.replies.slice(0, 5);
+        return this.replies.slice(0, 10);
       }
     }
   },

@@ -67,7 +67,7 @@
                 <div>
                   <img
                     :src="list.last_reply.author.avatar_url"
-                    style="width:40px;height: 40px;border-radius:50%;"
+                    style="width:30px;height: 30px;border-radius:50%;"
                   />
                 </div>
                 <div class="commentContent">{{list.last_reply.author.loginname}}</div>
@@ -243,11 +243,9 @@ li {
 .PostList {
   max-width: 1094px;
   margin: 0 auto;
-}
-
-.PostList {
   margin-top: 14px;
 }
+
 .good,
 .other {
   font-size: 12px;
@@ -277,7 +275,7 @@ li {
 }
 ul.titleList > li {
   position: relative;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 ul.titleList > li::before {
   content: "";
@@ -318,6 +316,7 @@ ul.titleList > li:hover::before {
   flex-direction: column;
   padding: 5px 5px;
   border-left: 1px solid #dddddd;
+  margin-left: 5px;
 }
 .left_li {
   flex: 13;
@@ -335,7 +334,6 @@ ul.titleList > li:hover::before {
 .title:focus,
 .title:hover {
   color: #005580;
-  // text-decoration: underline;
 }
 .title:active,
 .title:hover {
@@ -373,7 +371,7 @@ ul.titleList > li:hover::before {
 }
 
 li > .left_li > div > a {
-  width: 30%;
+  width: 25%;
   height: 100%;
   margin-left: 4%;
 }
@@ -429,7 +427,7 @@ title {
   margin-bottom: 5px;
 }
 .lastComment {
-  margin: 10px 10px 5px 10px;
+  margin: 10px 10px 8px 10px;
 }
 .view,
 .comments,
@@ -450,10 +448,6 @@ title {
 .commentNum,
 .commentContent {
   font-size: 16px;
-  // font-family: "宋体", "Courier New", sans-serif, "Times New Roman",
-  //   "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
-  //   "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  // font-weight: bold;
 }
 .replyWrapper {
   display: flex;
