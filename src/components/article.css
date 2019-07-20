@@ -152,9 +152,7 @@ li {
   display: inline-block;
 }
 
-.reply p {
-  /* overflow: auto; */
-}
+
 
 .icon {
   width: 80px;
@@ -276,5 +274,8 @@ a:hover {
 
   .from_type {
     display: none !important;
+  }
+  .reply p {
+    overflow: auto;
   }
 }
