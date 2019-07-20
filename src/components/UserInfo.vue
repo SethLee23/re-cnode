@@ -67,6 +67,7 @@ export default {
     this.getCollect();
     this.$root.bus.$on("transMessage", value => {
       this.recieveMessage = value;
+      console.log(this.recieveMessage);
     }),
       (this.isLoading = true);
   },

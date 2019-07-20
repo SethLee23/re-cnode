@@ -61,11 +61,7 @@ export default {
           prevEl: '.'+ this.thisClass + ".swiper-button-prev"
         },
        slidesPerView :'auto' ,
-        slidesPerGroup: 3,
         spaceBetween: 10,
-         observer:true,
-    observeSlideChildren:true,
-    observeParents:true,
       });
     });
   },
@@ -132,10 +128,14 @@ export default {
   outline: none;
 }
 @media screen and (max-width: 577px) {
+  .article {
+    overflow: hidden;
+  }
 .swiperFather {
   width: 300px;
   height: 250px;
   position: relative;
+  margin: 0 auto;
 }
 .swiper-button-prev {
   position: absolute;
