@@ -2,7 +2,6 @@
   <div class="sliderBar">
     <div class="authorDetail">
       <div class="author">
-        <!-- <div class="authorTitle">作者</div> -->
         <div class="img_author">
           <div>
           <router-link :to="{name:'user_Info',params:{name:authorDetails.loginname}}">
@@ -45,6 +44,8 @@
 </template>
 
 <script>
+import fetch_g from "../modules/fetch_g";
+import url from "../modules/api";
 export default {
   name: "SliderBar",
   data() {
@@ -83,8 +84,7 @@ export default {
   },
   methods: {
     getAuthorDetails() {
-      this.$http
-        .get(`https://cnodejs.org/api/v1/user/${this.$route.params.name}`)
+     fetch_g(`${url.userInfo}${this.$route.params.name}`)
         .then(res => {
           this.isLoading = false;
           this.authorDetails = res.data.data;
@@ -95,8 +95,7 @@ export default {
         });
     },
     topicWithoutAnswer() {
-      this.$http
-        .get("https://cnodejs.org/api/v1/topics")
+      fetch_g(url.topics)
         .then(res => {
           this.isLoading = false;
           let lists = res.data.data;
@@ -108,13 +107,6 @@ export default {
             }
           });
           this.noAnswer = arr;
-          //for(let i=0;i<lists.length;i++){
-          // if(lists[i].reply_count===0){
-          // arr.push(lists[i])
-          // }}
-          //this.noAnswer = arr
-          // console.log(1)
-          // console.log(arr)
         })
         .catch(function(error) {
           console.log(error);
@@ -137,10 +129,6 @@ export default {
     font-family: "shiguang";
     src: url(../../static/ShiGuangManManZou-2.ttf);
   } 
-  @font-face {
-    font-family: "wenyue";
-    src: url(../../static/WenYueGuTiFangSong-2.ttf);
-  }
   @font-face {
     font-family: "cambo";
     src: url(../../static/Cambo-Regular.otf);
@@ -198,7 +186,10 @@ justify-content: center;
   width:90px;
   border-radius: 50%;
 }
-
+.author {
+  background: white;
+  margin-bottom: 12px;
+}
 a {
   color: #778087;
   text-decoration: none;
@@ -210,11 +201,7 @@ a {
   font-family: dolly;
   color: #778087;
 }
-.author {
-  background: white;
-  /* border: 1px solid rgb(225, 225, 225); */
-  margin-bottom: 12px;
-}
+
 .topicContent > a {
   line-height: 30px;
   color: #778087;
@@ -246,7 +233,6 @@ a {
 }
 
 .otherTopic li,.noAnswer li {
-  /* border: 1px solid red; */
   font-size: 16px;
   border-bottom: 1px dashed #aaa;
   border-radius: 4px;

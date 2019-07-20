@@ -50,7 +50,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      new Swiper(".swiper-container"+'.'+ this.thisClass, {
+      new Swiper('.swiper-container'+'.'+ this.thisClass, {
         loop: true, // 循环模式选项
         // autoplay: true, //等同于以下设置
         autoHeight: true,
@@ -66,8 +66,6 @@ export default {
          observer:true,
     observeSlideChildren:true,
     observeParents:true,
-        // slidesOffsetBefore: 100
-        // slidesOffsetAfter : 100,
       });
     });
   },
@@ -77,7 +75,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 .swiper-container {

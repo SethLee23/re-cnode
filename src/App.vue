@@ -1,24 +1,7 @@
 <template>
   <div id="app">
-    <vue-particles
-      color="#dedede"
-      :particleOpacity="0.7"
-      :particlesNumber="80"
-      shapeType="circle"
-      :particleSize="4"
-      linesColor="#dedede"
-      :linesWidth="1"
-      :lineLinked="true"
-      :lineOpacity="0.4"
-      :linesDistance="150"
-      :moveSpeed="3"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="true"
-      clickMode="push"
-    ></vue-particles>
-
-    <div class="wrapper" ref="main" style="">
+    <vue-particles color="#dedede" :particleOpacity="0.7" :particlesNumber="80" shapeType="circle" :particleSize="4" linesColor="#dedede" :linesWidth="1" :lineLinked="true" :lineOpacity="0.4" :linesDistance="150" :moveSpeed="3" :hoverEffect="true" hoverMode="grab" :clickEffect="true" clickMode="push" ></vue-particles>
+    <div class="wrapper">
       <Header></Header>
       <div class="main" >
         <router-view name="SliderBar" class="SliderBar" v-if="wideScreen"></router-view>
@@ -30,31 +13,21 @@
 
 <script>
 import Vue from 'vue'
+import backToTop from './components/backToTop'
 import Header from "./components/Header";
 import PostList from "./components/PostList";
 import Article from "./components/Article";
 import UserInfo from "./components/UserInfo";
+Vue.component('back-to-top',backToTop)
+
 export default {
   name: "App",
   data(){
     return {
     hasPostList: false,
-    eventBus: new Vue(),
     wideScreen: true,
   }},
-  provide() {
-    return {
-      eventBus: this.eventBus
-    };
-  },
-  created(){
-    
-  },
   mounted(){
-    this.hasPostList = this.$children.some(childVm => {
-      return childVm.$el.classList.contains("PostList")
-    });
-     this.eventBus.$emit('init',this.hasPostList)
      window.addEventListener('resize',()=>{
      if(document.documentElement.clientWidth>900){
        console.log('>900')
@@ -64,17 +37,10 @@ export default {
        console.log('<900')
           this.wideScreen = false
         }
-
      })
   },
-   watch: {
-    '$route' (from, to) {
-      this.hasPostList = this.$children.some(childVm => {
-      return childVm.$el.classList.contains("PostList")
-    });
-     this.eventBus.$emit('change',this.hasPostList)
-    },
-    },
+  methods: {
+  },
   components: {
     Header,
     PostList,

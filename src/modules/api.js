@@ -3,6 +3,7 @@ let url = {
   topics: '/topics',
   article: '/topic/',
   userInfo: '/user/',
+  collect: '/topic_collect/'
 }
 for(let key in url){
     if (url.hasOwnProperty(key)) {

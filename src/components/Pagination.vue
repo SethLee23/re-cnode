@@ -24,7 +24,7 @@ export default {
       pages: [1, 2, 3, 4, 5, "..."],
       currentPage: 1 ,//当前选中的页码
     };
-  },//123456...
+  },
   methods: {
     changePage(page) {
       if(typeof page != 'number'){
@@ -92,10 +92,8 @@ button {
 }
 
 .pagebtn {
-  /* position: relative; */
   bottom: 1px;
   width: 40px;
-  /* margin: 0 4px; */
 }
 
 .currentPage {

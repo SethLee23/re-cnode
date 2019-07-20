@@ -1,236 +1,280 @@
 @font-face {
-    font-family: "dolly";
-    src: url(../../static/dolly-roman.woff.ttf);
-  }
-  @font-face {
-    font-family: "droid";
-    src: url(../../static/DroidSansFallbackBold.ttf);
-  }
+  font-family: "dolly";
+  src: url(../../static/dolly-roman.woff.ttf);
+}
 
-  @font-face {
-    font-family: "shiguang";
-    src: url(../../static/ShiGuangManManZou-2.ttf);
-  } 
-  @font-face {
-    font-family: "wenyue";
-    src: url(../../static/WenYueGuTiFangSong-2.ttf);
-  }
-  @font-face {
-    font-family: "cambo";
-    src: url(../../static/Cambo-Regular.otf);
-  }
-  
-  .topic_title {
-    text-align: center;
-    font-size: 20px;
-    font-family: shiguang;
-    /* font-weight: bold; */
-    padding-top: 8px;
-  }
-  body {
-    text-size-adjust: none;
-  }
-  .markdown-body {
-    font-size: 1.05rem;
-    color: rgb(46, 48, 48);
-    font-family:  Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Source Han Sans CN",Roboto,STheiti, Verdana, 微软雅黑, 宋体, Geneva, "宋体", "Courier New",
-      sans-serif, "Times New Roman", "Helvetica Neue", Helvetica, Arial,
-      "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei",
-      "WenQuanYi Micro Hei", sans-serif;
-  }
-  #topList {
-    padding: 8px 0;
-    text-align: center;
-  }
-  #topList > li {
-    font-size: 11px;
-    color: #b4b5b2;
-    margin: 0 2px;
-    font-family: dolly;
-  }
-  
-  .loading {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  ul,
-  li {
-    list-style-type: none !important;
-  }
-  .replyUp {
-    border-top: 1px dashed rgb(94, 97, 99);
-    padding: 3% 0 0 0;
-  }
-  .reply_info > span{
-   margin: 0 10px;
-   font-family: shiguang;
-  }
-  .reply_info>a>span{
-   font-family:shiguang;
-   font-size: 20px;
-  }
-  .thumb {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    display: inline-block;
-  }
-  .title {
-    font-size: 22px;
-  }
-  
-  .topbar {
-    height: 80px;
-    font-size: 14px;
-    width: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,-130%);
+@font-face {
+  font-family: "droid";
+  src: url(../../static/DroidSansFallbackBold.ttf);
+}
+
+@font-face {
+  font-family: "shiguang";
+  src: url(../../static/ShiGuangManManZou-2.ttf);
+}
+
+@font-face {
+  font-family: "cambo";
+  src: url(../../static/Cambo-Regular.otf);
+}
+
+.topic_title {
+  text-align: center;
+  font-size: 20px;
+  font-family: shiguang;
+  /* font-weight: bold; */
+  padding-top: 8px;
+}
+
+body {
+  text-size-adjust: none;
+}
+
+.loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  text-align: center;
+  padding-top: 300px;
+}
+
+.markdown-body {
+  font-size: 1.05rem;
+  color: rgb(46, 48, 48);
+  font-family: Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", Roboto, STheiti, Verdana, 微软雅黑, 宋体, Geneva, "宋体", "Courier New",
+    sans-serif, "Times New Roman", "Helvetica Neue", Helvetica, Arial,
+    "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", sans-serif;
+}
+
+#topList {
+  padding: 8px 0;
+  text-align: center;
+}
+
+#topList>li {
+  font-size: 11px;
+  color: #b4b5b2;
+  margin: 0 2px;
+  font-family: dolly;
+}
+
+ul,
+li {
+  list-style-type: none !important;
+}
+
+.imgWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.reply img {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  /* position: relative; */
+  border-radius: 50%;
+}
+
+.reply {
+  position: relative;
+  background: rgb(58, 63, 65) url(../assets/bg.jpg);
+  border-radius: 4px;
+  margin-top: 10rem;
+  margin-bottom: 6rem;
+}
+
+.replyUp {
+  border-top: 1px dashed rgb(94, 97, 99);
+  padding: 3% 0 0 0;
+}
+
+.reply_info {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.reply_info>span {
+  margin: 0 10px;
+  font-family: shiguang;
+}
+
+.reply_info>a>span {
+  font-family: shiguang;
+  font-size: 20px;
+}
+
+.reply .markdown-body {
+  margin-top: 15px;
+  /* color: #a8acae;*/
+  color: rgb(126, 132, 135)
+}
+
+.reply p a,
+.reply .replyContent span {
+  color: rgb(168, 172, 174) !important;
+  text-decoration: none;
+}
+
+.replyContent {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  /* overflow: auto; */
+  flex: 1;
+}
+
+.replySec {
+  border-radius: 4px;
+  padding: 0 3% 0 3%;
+
+}
+
+.reply_by_author {
+  color: #fff;
+  background-color: #6ba44e;
+  padding: 2px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.replyUp a:nth-of-type(2) {
+  margin-left: 0px;
+  display: inline-block;
+}
+
+.reply p {
+  /* overflow: auto; */
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  fill: rgb(219, 86, 64);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -130%);
+}
+
+.thumb {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+margin-left:auto;
+margin-right:10px;
+}
+
+.title {
+  font-size: 22px;
+}
+
+.topbar {
+  height: 80px;
+  font-size: 14px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -130%);
   color: white;
   font-family: droid;
+}
+
+.article {
+  overflow: auto;
+}
+
+.article:not(:first-child) {
+  margin-right: 315px;
+  margin-top: 15px;
+}
+
+.topic_wrapper {
+  background: #3a3f41 url(../assets/note-bg.jpg);
+  border: 1px solid #ddd;
+  padding: 0.875rem;
+  box-shadow: 0 3px 15px 4px rgba(51, 51, 51, 0.8);
+}
+
+.topic_header {
+  border: 1px dashed #ddd;
+  padding: 1.75rem;
+}
+
+.topic_header ul {
+  list-style: none;
+  padding: 0px 0px;
+  margin: 6px 0px;
+}
+
+.topic_header li {
+  display: inline-block;
+  font-size: 12px;
+  color: #838383;
+}
+
+.topic_content {
+  border-top: 1px dashed #aaaaaa;
+  padding: 10px 10px 10px 10px;
+  overflow: auto;
+}
+
+.markdown-text a {
+  color: rgb(126, 132, 135) !important;
+}
+
+.markdown-body img {
+  width: 92% !important;
+}
+
+.good {
+  background: #80bd01;
+  padding: 2px 4px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  color: #fff;
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: #838383;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+@media screen and (max-width: 577px) {
+  .article:not(:first-child) {
+    margin-right: 0;
   }
+
   .article {
     overflow: auto;
   }
-  .article:not(:first-child) {
-    margin-right: 315px;
-    margin-top: 15px;
-  }
-  
-  .reply {
-    position: relative;
-    background: rgb(58, 63, 65) url(../assets/bg.jpg); 
-    border-radius: 4px;
-    margin-top: 10rem;
-    margin-bottom: 6rem;
-  }
-  
-  .topic_header {
-   border: 1px dashed #ddd;
-      padding: 1.75rem;
-  }
-  
-  .topic_wrapper {
-    background: #3a3f41 url(../assets/note-bg.jpg);
-    border: 1px solid #ddd;
-    padding: 0.875rem;
-    box-shadow: 0 3px 15px 4px rgba(51, 51, 51, 0.8);
-  }
-  .reply  .markdown-body {
-    margin-top: 15px;
-    /* color: #a8acae;*/
-    color: rgb(126,132,135)
-  }
-  .markdown-text a{
-    color: rgb(126,132,135)!important;
-  }
-  
-  
 
-  .reply p a,
-  .reply .replyContent span {
-    /* font-size: 13px; */
-    color: rgb(168,172,174) !important;
-    text-decoration: none;
+  .reply {
+    margin-bottom: 0;
   }
-  .replySec {
-    /* border-bottom: 1px solid #e5e5e5; */
-    border-radius: 4px;
-    padding: 0 3% 0 3%;
-    
+
+  .from_type {
+    display: none !important;
   }
-  
-  .loading {
-    text-align: center;
-    padding-top: 300px;
-  }
-  
-  .replyUp a:nth-of-type(2) {
-    margin-left: 0px;
-    display: inline-block;
-  }
-  
-  .topic_header ul {
-    list-style: none;
-    padding: 0px 0px;
-    margin: 6px 0px;
-  }
-  
-  .topic_header li {
-    display: inline-block;
-    font-size: 12px;
-    color: #838383;
-  }
-  
-  .topic_content {
-    border-top: 1px dashed #aaaaaa;
-    padding: 10px 10px 10px 10px;
-    overflow: auto;
-  }
-  
-  .markdown-body img {
-    width: 92% !important;
-  }
-  .good {
-    background: #80bd01;
-    padding: 2px 4px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -o-border-radius: 3px;
-    color: #fff;
-    font-size: 12px;
-  }
-  
-  a {
-    text-decoration: none;
-    display: inline-block;
-    color: #838383;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  .reply_by_author {
-    color: #fff;
-    background-color: #6ba44e;
-    padding: 2px;
-    font-size: 12px;
-    text-align: center;
-  }
-  .markdown-body a {
-    /* border: 1px solid red; */
-  }
-  .icon {
-  width: 80px;
-  height:80px;
-  fill: rgb(219,86,64);
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%,-130%);
-  }
-  .reply p{
-    overflow: auto;
-  }
-  @media screen and (max-width: 577px) {
-    .article:not(:first-child) {
-      margin-right: 0;
-      margin-top: 15px;
-    }
-    .article {
-      overflow: auto;
-    }
-    .reply {
-      margin-bottom: 0;
-    }
-    
-    .from_type {
-      display: none !important;
-    }
-  }
-  
+}

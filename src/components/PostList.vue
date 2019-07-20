@@ -7,7 +7,7 @@
     <div class="lists" v-else>
       <ul
         class="titleList"
-        v-infinite-scroll="getPostList"
+        v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loadingMore"
         infinite-scroll-distance="10"
       >
@@ -87,7 +87,8 @@
         </li>
       </ul>
     </div>
-    <Pagination @handel="changePage" class="ifshowPagination"></Pagination>
+    <back-to-top></back-to-top>
+    <Pagination @handel="changePage" class="ifshowPagination" ></Pagination>
   </div>
 </template>
 
@@ -121,13 +122,22 @@ export default {
     this.isLoading = true;
     this.getPostList();
   },
-  mounted() {},
+  mounted() {
+  },
   watch: {
     $route(from, to) {
       this.getPostList();
     }
   },
   methods: {
+    loadMore(){
+      if(window.ontouchstart===null){
+        this.getPostList()
+      }else{
+        this.loadingMore = false
+        return
+      }
+    },
     getPostList() {
       let that = this;
       if (this.allLoaded) return;
@@ -157,6 +167,7 @@ export default {
                 that.allLoaded = true;
               }
               if (that.lists.length&&arr[0].tab===that.lists[0].tab) {
+                console.log(this.lists)
                 that.lists = that.lists.concat(arr);
               } else {
                 that.lists = arr;
