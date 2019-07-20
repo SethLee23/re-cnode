@@ -25,12 +25,12 @@
         <div class="loginTime">注册时间 {{userData.create_at | formatDate}}</div>
       </section>
       
-      <div style="width:80%;margin: 0 auto;">
+      <div style="width:80%;margin: 0 auto;" v-if="returnFiveTopic">
       <p class="topicsRecent">最近创建的话题</p>
         <swiper :lists="returnFiveTopic" ref="1" thisClass="topics1"></swiper>
       </div>
 
-      <div class="replyWrapper">
+      <div class="replyWrapper" v-if="returnFiveReplies">
          <p  class="replies">最近参与的话题</p>
         <swiper :lists="returnFiveReplies" ref="2" thisClass="replies1"></swiper>
       </div>

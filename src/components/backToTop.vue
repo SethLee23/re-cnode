@@ -42,7 +42,7 @@ export default {
   background-color: rgba(255, 255, 255, 20%); /* 设置背景背景颜色 */
   color: #5cb85c; /* 设置文本颜色 */
   cursor: pointer; /* 鼠标移到按钮上显示手型 */
-  padding: 10px 15px 15px 15px; /* 增加一些内边距 */
+  padding: 10px 15px 15px 15px!important; /* 增加一些内边距 */
   border-radius: 6px; /* 增加圆角 */
 }
 
