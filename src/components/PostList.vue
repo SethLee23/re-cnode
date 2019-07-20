@@ -5,7 +5,12 @@
     </div>
 
     <div class="lists" v-else>
-      <ul class="titleList">
+      <ul
+        class="titleList"
+        v-infinite-scroll="getPostList"
+        infinite-scroll-disabled="loadingMore"
+        infinite-scroll-distance="10"
+      >
         <li v-for="list in lists" v-if="list.last_reply">
           <div class="left_li">
             <div class="img_title">
@@ -82,15 +87,18 @@
         </li>
       </ul>
     </div>
-    <Pagination @handel="changePage"></Pagination>
+    <Pagination @handel="changePage" class="ifshowPagination"></Pagination>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import Pagination from "./Pagination";
 import fetch_g from "../modules/fetch_g";
 import url from "../modules/api";
+import { InfiniteScroll } from "mint-ui";
 
+Vue.use(InfiniteScroll);
 export default {
   name: "PostList",
   data() {
@@ -98,58 +106,66 @@ export default {
       isLoading: false,
       lists: {},
       page: 1,
-      loadingMore: false
+      loadingMore: false,
+      allLoaded: false,
+      limit: 10,
+      tab: '',
+    lastTab: this.$route.params.tab
     };
   },
   components: {
     Pagination
   },
-   beforeMount() {
-     this.getPostList();
-  },
+  beforeMount() {},
   created() {
-    console.log(2222)
     this.isLoading = true;
-    // this.getPostList();
+    this.getPostList();
   },
-  mounted() {
-    // this.getPostList();
-    // this.$root.bus.$on("handelType", index => {
-    //   console.log(index);
-    //   this.changeTab(index);
-    //   this.getPostList();
-    // });
+  mounted() {},
+  watch: {
+    $route(from, to) {
+      this.getPostList();
+    }
   },
-   watch: {
-    $route(from,to) {
-      console.log('this.route')
-      this.getPostList()
-      }
-    },
   methods: {
     getPostList() {
+      let that = this;
+      if (this.allLoaded) return;
+      this.loadingMore = true;
       fetch_g(url.topics, {
-        params: { page: this.page, limit: 10, tab: this.$route.params.tab }
+        params: {
+          page: this.page,
+          limit: this.limit,
+          tab: this.$route.params.tab
+        }
       }).then(res => {
-        console.log('taeasadsadsad')
-        console.log(this.$route.params.tab)
         let list = res.data.data;
         let arr = [];
-        //  Promise.all(
         list.map((item, index) => {
           fetch_g(`${url.article}${item.id}`).then(res => {
             let len = res.data.data.replies.length;
             // 添加属性
             arr.push(
               Object.assign({}, item, {
-                last_reply: res.data.data.replies[len - 1]
+                last_reply: res.data.data.replies[len - 1],
+                tab: this.$route.params.tab
               })
             );
+            //当获取的数组的长度等于请求数据的条数时，才开始判断
+            if (arr.length == this.limit) {
+              if (arr.length < this.limit) {
+                that.allLoaded = true;
+              }
+              if (that.lists.length&&arr[0].tab===that.lists[0].tab) {
+                that.lists = that.lists.concat(arr);
+              } else {
+                that.lists = arr;
+              }
+              this.loadingMore = false;
+              this.page++;
+            }
           });
         });
-        // );
-        console.log(arr);
-        this.lists = arr;
         this.isLoading = false;
       });
     },
@@ -158,7 +174,7 @@ export default {
       console.log("传入page");
       this.page = value;
       this.getPostList();
-    },
+    }
   }
 };
 </script>
@@ -510,7 +526,7 @@ a {
     align-items: center;
     justify-content: center;
   }
-  .img_title>.left_content > a {
+  .img_title > .left_content > a {
     display: none;
   }
   li > .left_li > div > a > img {
@@ -539,6 +555,9 @@ a {
   .good,
   .other {
     font-size: 0.6rem;
+  }
+  .ifshowPagination {
+    display: none !important;
   }
 }
 </style>

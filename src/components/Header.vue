@@ -12,7 +12,7 @@
     </div>
     <ul class="navbar">
       <li>
-        <router-link :to="{name:'root',params:{page:1,limit:17}}">首页</router-link>
+        <router-link :to="{name:'root',params:{page:1,limit:17,tab:'all'}}">首页</router-link>
         <router-link
           :to="{name:'root',params:{page:1,limit:20,tab: item.tab}}"
           v-for="item in navConfig"
