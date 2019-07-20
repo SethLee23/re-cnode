@@ -43,7 +43,7 @@ export default {
   color: #5cb85c; /* 设置文本颜色 */
   cursor: pointer; /* 鼠标移到按钮上显示手型 */
   padding: 10px 15px 15px 15px; /* 增加一些内边距 */
-  border-radius: 50%; /* 增加圆角 */
+  border-radius: 6px; /* 增加圆角 */
 }
 
 /* .back-to-top:hover {
