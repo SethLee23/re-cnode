@@ -121,11 +121,13 @@ export default {
   position: absolute;
   left: -27px;
   outline: none;
+  transform: scale(0.8);
 }
 .swiper-button-next {
   position: absolute;
   right: -27px;
   outline: none;
+  transform: scale(0.8);
 }
 @media screen and (max-width: 577px) {
   .article {
@@ -140,6 +142,7 @@ export default {
 .swiper-button-prev {
   position: absolute;
   left: -27px;
+  
 }
 .swiper-button-next {
   position: absolute;
