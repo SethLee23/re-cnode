@@ -1,0 +1,20 @@
+
+
+      
+          @font-face {
+            font-family: "droid";
+            src: url(./DroidSansFallbackBold.ttf) format('truetype');
+          }
+          @font-face {
+            font-family: "pika";
+            src: url(./FangZhengPiKaPiKa-2.ttf) format('truetype');
+          }
+          @font-face {
+            font-family: "shiguang";
+            src: url(./ShiGuangManManZou-2.ttf) format('truetype');
+          }
+          
+        
+#h {
+  font-family: "droid", "pika","shiguang";                      
+}

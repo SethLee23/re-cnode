@@ -60,15 +60,15 @@ export default {
 <style scoped>
 @font-face {
   font-family: "shiguang";
-  src: url(../../static/ShiGuangManManZou-2.ttf);
+  src: url(../../font/ShiGuangManManZou-2.ttf);
 }
 @font-face {
   font-family: "droid";
-  src: url(../../static/DroidSansFallbackBold.ttf);
+  src: url(../../font/DroidSansFallbackBold.ttf);
 }
 @font-face {
   font-family: "pika";
-  src: url(../../static/FangZhengPiKaPiKa-2.ttf);
+  src: url(../../font/FangZhengPiKaPiKa-2.ttf);
 }
 * {
   box-sizing: border-box;

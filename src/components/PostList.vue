@@ -194,35 +194,24 @@ export default {
 <style lang="less" scoped>
 @font-face {
   font-family: "dolly";
-  src: url(../../static/dolly-roman.woff.ttf);
+  src: url(../../font/dolly-roman.woff.ttf);
 }
 @font-face {
   font-family: "droid";
-  src: url(../../static/DroidSansFallbackBold.ttf);
-}
-@font-face {
-  font-family: "yuan";
-  src: url(../../static/ErZiYuanPangTouYuJian-2.ttf);
+  src: url(../../font/DroidSansFallbackBold.ttf);
 }
 @font-face {
   font-family: "pika";
-  src: url(../../static/FangZhengPiKaPiKa-2.ttf);
-}
-@font-face {
-  font-family: "hezi";
-  src: url(../../static/HeZi-TingBuDao-2.ttf);
+  src: url(../../font/FangZhengPiKaPiKa-2.ttf);
 }
 @font-face {
   font-family: "shiguang";
-  src: url(../../static/ShiGuangManManZou-2.ttf);
+  src: url(../../font/ShiGuangManManZou-2.ttf);
 }
-@font-face {
-  font-family: "wenyue";
-  src: url(../../static/WenYueGuTiFangSong-2.ttf);
-}
+
 @font-face {
   font-family: "cambo";
-  src: url(../../static/Cambo-Regular.otf);
+  src: url(../../font/Cambo-Regular.otf);
 }
 //font-family
 .lastComment,
