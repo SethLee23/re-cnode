@@ -34,6 +34,7 @@
          <p  class="replies">最近参与的话题</p>
         <swiper :lists="returnFiveReplies" ref="2" thisClass="replies1"></swiper>
       </div>
+      <back-to-top></back-to-top>
     </div>
   </div>
 </template>
