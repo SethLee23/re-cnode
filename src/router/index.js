@@ -17,7 +17,7 @@ export default new Router({
       },
     {
       path: '/tab=:tab',
-      name: 'root',
+      name: 'category',
       components: {
         main:PostList
       }

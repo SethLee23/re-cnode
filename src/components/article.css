@@ -115,6 +115,7 @@ li {
 
 .reply .markdown-body {
   margin-top: 15px;
+  margin-left: 0;
   /* color: #a8acae;*/
   color: rgb(126, 132, 135)
 }
@@ -125,14 +126,17 @@ li {
   text-decoration: none;
 }
 
-.replyContent {
+div.replyContent {
   display: flex;
   flex-direction: column;
   margin-left: 5%;
-  /* overflow: auto; */
+  /* */
   flex: 1;
+  overflow: auto;
 }
-
+p.replyContent{
+  display: flex;
+}
 .replySec {
   border-radius: 4px;
   padding: 0 3% 0 3%;

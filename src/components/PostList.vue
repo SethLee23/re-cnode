@@ -13,39 +13,14 @@
       >
         <li v-for="list in lists" v-if="list.last_reply">
           <div class="left_li">
-            <div class="img_title">
-              <router-link
-                :to="{
-        name:'user_Info',
-        params:{
-          name:list.author.loginname
-        }}"
-              >
+            <div class="img_title"> <router-link :to="{ name:'user_Info', params:{ name:list.author.loginname }}" >
                 <img :src="list.author.avatar_url" alt />
               </router-link>
               <div class="left_content">
-                <!-- <div> -->
-                <router-link
-                  class="authorName"
-                  style
-                  :to="{
-        name:'user_Info',
-        params:{
-          name:list.author.loginname
-        }}"
-                >{{list.author.loginname}}</router-link>
+                <router-link class="authorName" style :to="{ name:'user_Info', params:{ name:list.author.loginname }}" >{{list.author.loginname}}</router-link>
                 <!-- </div> -->
                 <!-- <div > -->
-                <router-link
-                  class="title"
-                  style="flex:1;display:flex;align-items:center"
-                  :to="{
-        name:'post_content',
-        params:{
-          id:list.id,
-          name:list.author.loginname
-        }}"
-                >
+                <router-link class="title" style="flex:1;display:flex;align-items:center" :to="{ name:'post_content', params:{ id:list.id, name:list.author.loginname }}" >
                   <span>{{list.title}}</span>
                 </router-link>
               </div>
@@ -111,7 +86,6 @@ export default {
       allLoaded: false,
       limit: 10,
       tab: '',
-    lastTab: this.$route.params.tab
     };
   },
   components: {
@@ -158,7 +132,7 @@ export default {
             arr.push(
               Object.assign({}, item, {
                 last_reply: res.data.data.replies[len - 1],
-                tab: this.$route.params.tab
+                tabs: this.$route.params.tab
               })
             );
             //当获取的数组的长度等于请求数据的条数时，才开始判断
@@ -166,11 +140,11 @@ export default {
               if (arr.length < this.limit) {
                 that.allLoaded = true;
               }
-              if (that.lists.length&&arr[0].tab===that.lists[0].tab) {
-                console.log(this.lists)
+              if (that.lists.length&&arr[0].tabs===that.lists[0].tabs) {
                 that.lists = that.lists.concat(arr);
               } else {
                 that.lists = arr;
+                console.log(this.lists)
               }
               this.loadingMore = false;
               this.page++;

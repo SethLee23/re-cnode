@@ -1,7 +1,7 @@
 <template>
   <div class="Header">
     <div>
-      <router-link :to="{name:'root',params:{page:1,limit:20,tab:'all'}}">
+      <router-link :to="{name:'home',params:{page:1,limit:20}}">
         <img src="../assets/cnodejs_light.svg" alt="logo" class="logo" />
       </router-link>
     </div>
@@ -12,8 +12,8 @@
     </div>
     <ul class="navbar">
       <li>
-        <router-link :to="{name:'root',params:{page:1,limit:17,tab:'all'}}">首页</router-link>
-        <router-link :to="{name:'root',params:{page:1,limit:20,tab: item.tab}}" v-for="(item, index) in navConfig">
+        <router-link :to="{name:'home',params:{page:1,limit:17}}">首页</router-link>
+        <router-link :to="{name:'category',params:{page:1,limit:20,tab: item.tab}}" v-for="(item, index) in navConfig">
           {{item.type}}
         </router-link>
       </li>
@@ -23,7 +23,7 @@
 
 <script>
 let navConfig = [
-  { tab: "all", type: "全部" },
+  { tab: "", type: "全部" },
   { tab: "good", type: "精华" },
   { tab: "share", type: "分享" },
   { tab: "ask", type: "问答" },
