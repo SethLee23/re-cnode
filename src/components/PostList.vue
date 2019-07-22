@@ -61,6 +61,7 @@
           </div>
         </li>
       </ul>
+       <div class="loading-more" v-show="loadingMore"><span></span></div>
     </div>
     <back-to-top></back-to-top>
     <Pagination @handel="changePage" class="ifshowPagination" ></Pagination>
@@ -144,7 +145,6 @@ export default {
                 that.lists = that.lists.concat(arr);
               } else {
                 that.lists = arr;
-                console.log(this.lists)
               }
               this.loadingMore = false;
               this.page++;
@@ -447,6 +447,31 @@ a {
   -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
   -webkit-line-clamp: 2; /** 显示的行数 **/
   overflow: hidden; /** 隐藏超出的内容 **/
+}
+.loading-more {
+  width: 100%;
+  padding: 20px 10px;
+  vertical-align: middle;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  line-height: 20px;
+  box-sizing: border-box
+}
+.loading-more span {
+  display: inline-block;
+  margin-top: 10px;
+  width: 16px;
+  height: 16px;
+  background: url(https://b.yzcdn.cn/v2/image/loader.gif) no-repeat 50%;
+  background-size: 16px 16px
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),
+only screen and (min--moz-device-pixel-ratio:1.5),
+only screen and (min-device-pixel-ratio:1.5) {
+  .loading-more span {
+    background-image: url(https://b.yzcdn.cn/v2/image/loader@2x.gif)
+  }
 }
 @media screen and (min-width: 577px) and (max-width: 1000px) {
   ul.titleList > li::before {
