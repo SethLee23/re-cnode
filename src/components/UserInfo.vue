@@ -61,9 +61,6 @@ export default {
   },
   beforeMount: function() {},
   created() {
-     window.onresize=function(){
-    swiper.update();
-}
     this.getUserData();
     this.getCollect();
     this.$root.bus.$on("transMessage", value => {

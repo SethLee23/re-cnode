@@ -12,8 +12,8 @@
     </div>
     <ul class="navbar">
       <li>
-        <router-link :to="{name:'home',params:{page:1,limit:17}}">首页</router-link>
-        <router-link :to="{name:'category',params:{page:1,limit:20,tab: item.tab}}" v-for="(item, index) in navConfig">
+        <router-link :to="{name:'home',params:{page:1,limit:15}}">首页</router-link>
+        <router-link :to="{name:'category',params:{page:1,limit:15,tab: item.tab}}" v-for="(item, index) in navConfig">
           {{item.type}}
         </router-link>
       </li>
