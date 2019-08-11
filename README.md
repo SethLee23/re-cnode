@@ -6,7 +6,7 @@
 ## 接口说明
 本项目使用 CNode 社区官方提供的 API。
 
-## 项目预览
+## [项目预览](https://sethlee23.github.io/re-cnode/)
 ### web 端页面
 #### 首页
 ![w_home.png](https://i.loli.net/2019/08/11/zZt6l7IurCEVQL4.png)
